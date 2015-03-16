@@ -10,7 +10,13 @@ This is an R package that compares a user's single nucleotide variant list to ca
 
 ## Usage
     library(aml31Benchmarking)
-    benchmark("snvlist","outTable","out.pdf")
+
+    #Run an example with included mock data
+    data(testData)
+    benchmark(testData,"/tmp/outTable","/tmp/out.pdf")
+
+    #Run on your data
+    read.table("myData","/path/to/table/output","/path/to/plot/output.pdf")
 
 
 
