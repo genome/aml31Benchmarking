@@ -1,0 +1,9 @@
+Package: aml31Benchmarking
+Title: Benchmark variant calls against curated variant lists from aml31
+Version: 0.1.0
+Author: Chris Miller
+Description: Benchmark variant calls against curated variant lists from aml31
+Maintainer: Chris Miller <cmiller@genome.wustl.edu>
+License: MIT License | file LICENSE
+Depends: 
+Packaged: 2015-03-16 01:38:36 PM; cmiller
