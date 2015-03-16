@@ -1,6 +1,3 @@
-library(venneuler)
-
-
 addKey <- function(df){
     df$key = paste(df[,1],df[,2],df[,4],df[,5],sep="_")
     return(df)
@@ -61,8 +58,6 @@ createHist <- function(b, a, label){
 
     v = rbind(v, data.frame(vaf=vaf, val=A, shared=AB))
   }
-  print(v)
-  #cat(v$val,file=stderr())
   vals = rep(v$vaf,v$val)
   hist(vals,breaks=seq(0,95,5),col=rgb(0,1,0,0.3),xlab="Tumor VAF",main="Valid uploaded variants by VAF")
   mtext(paste("comparison to",label,"list"),cex=0.9)
@@ -89,11 +84,12 @@ labelFound<-function(upload,truth){
 #truthList
 
 benchmark <- function(variantFile,tablePrefix,plotFile){
-
+  library(venneuler)
+  
   data(list.platinum)
   data(list.gold)
 
-  pdf(plotFile,width=8,height=5)
+  pdf(plotFile,width=10,height=5)
 
   #load("../data/list.platinum.Rdata")
   userData = read.table(variantFile,header=F,sep="\t", col.names=c("Chr","St","Sp","Ref","Var"))
