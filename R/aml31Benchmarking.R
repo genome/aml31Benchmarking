@@ -83,7 +83,7 @@ labelFound<-function(upload,truth){
 ##---------------------------------------------------------
 #truthList
 
-benchmark <- function(variantFile,tablePrefix,plotFile){
+benchmark <- function(variants,tablePrefix,plotFile){
   library(venneuler)
   
   data(list.platinum)
@@ -91,19 +91,16 @@ benchmark <- function(variantFile,tablePrefix,plotFile){
 
   pdf(plotFile,width=10,height=5)
 
-  #load("../data/list.platinum.Rdata")
-  userData = read.table(variantFile,header=F,sep="\t", col.names=c("Chr","St","Sp","Ref","Var"))
-  createVenn(addKey(userData), addKey(list.platinum), range=c(0,50), label="Platinum")
-  createHist(addKey(userData), addKey(list.platinum), label="Platinum")
-  userData = labelFound(addKey(userData), addKey(list.platinum))
-  write.table(userData,paste(tablePrefix,".platinum",sep=""),sep="\t",row.names=F,quote=F)
+  names(variants) = c("Chr","St","Sp","Ref","Var")
+  createVenn(addKey(variants), addKey(list.platinum), range=c(0,50), label="Platinum")
+  createHist(addKey(variants), addKey(list.platinum), label="Platinum")
+  variants = labelFound(addKey(variants), addKey(list.platinum))
+  write.table(variants,paste(tablePrefix,".platinum",sep=""),sep="\t",row.names=F,quote=F)
 
-  #load("../data/list.gold.Rdata")
-  userData = read.table(variantFile,header=F,sep="\t", col.names=c("Chr","St","Sp","Ref","Var"))
-  createVenn(addKey(userData), addKey(list.gold), range=c(0,50), label="Gold")
-  createHist(addKey(userData), addKey(list.gold), label="Gold")
-  userData = labelFound(addKey(userData), addKey(list.gold))
-  write.table(userData,paste(tablePrefix,".gold",sep=""),sep="\t",row.names=F,quote=F)
+  createVenn(addKey(variants), addKey(list.gold), range=c(0,50), label="Gold")
+  createHist(addKey(variants), addKey(list.gold), label="Gold")
+  variants = labelFound(addKey(variants), addKey(list.gold))
+  write.table(variants,paste(tablePrefix,".gold",sep=""),sep="\t",row.names=F,quote=F)
   
   dev.off()
 }
